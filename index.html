@@ -4,112 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Заявление о взыскании алиментов</title>
-  <style>
-    :root {
-      --clr-bg: #f8f9fa;
-      --clr-primary: #0d6efd;
-      --clr-text: #212529;
-      --clr-muted: #6c757d;
-      --radius: .375rem;
-    }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--clr-bg);
-      color: var(--clr-text);
-      line-height: 1.5;
-    }
+  <link rel="stylesheet" href="style.css">
 
-    .container {
-      max-width: 960px;
-      padding: 2rem 1rem;
-      margin: 0 auto;
-      background: #fff;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin: 0 0 .5rem;
-    }
-
-    p.lead {
-      margin: 0 0 2rem;
-      color: var(--clr-muted);
-    }
-
-    /* ----- form layout ----- */
-    form {
-      display: grid;
-      gap: 1.5rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      gap: 1rem;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    }
-
-    label {
-      display: block;
-      font-size: .875rem;
-      margin-bottom: .25rem;
-    }
-
-    input[type="text"],
-    input[type="date"] {
-      width: 100%;
-      padding: .5rem .75rem;
-      border: 1px solid #ced4da;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    input[type="radio"] {
-      margin-right: .5rem;
-    }
-
-    fieldset {
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: .5rem;
-      margin-top: .5rem;
-    }
-
-    .required::after {
-      content: " *";
-      color: var(--clr-primary);
-    }
-
-    button {
-      width: fit-content;
-      padding: .5rem 1.25rem;
-      font-size: 1rem;
-      color: #fff;
-      background: var(--clr-primary);
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #0954d6;
-    }
-  </style>
 </head>
 <body>
-  <main class="container">
-    <h1>Готовим заявление о взыскании алиментов</h1>
-    <p class="lead">Пожалуйста заполните все необходимые поля для подачи заявления на взыскание алиментов.</p>
+<main class="container">
+  <h1>Готовим заявление о взыскании алиментов</h1>
+  <p class="lead">Пожалуйста заполните все необходимые поля для подачи заявления на взыскание алиментов.</p>
 
-    <form>
+  <form>
       <!-- Имя -->
       <div>
         <label class="required" for="firstName">Ваше имя</label>
@@ -157,16 +61,626 @@
       <!-- Идентификатор -->
       <fieldset>
         <legend>Идентификатор</legend>
+
         <div class="radio-group">
-          <label><input type="radio" name="idType" value="snils"> СНИЛС</label>
+          <label><input type="radio" name="idType" value="snils" checked> СНИЛС</label>
           <label><input type="radio" name="idType" value="inn"> ИНН</label>
           <label><input type="radio" name="idType" value="passport"> серия и номер паспорта</label>
           <label><input type="radio" name="idType" value="driver"> серия и номер водительского удостоверения</label>
         </div>
+
+        <div id="snilsFields" class="id-fields">
+          <label for="snils">Ваш СНИЛС</label>
+          <input type="text" id="snils" name="snils" placeholder="000-000-000 00" pattern="\d{3}-\d{3}-\d{3} \d{2}">
+        </div>
+
+        <div id="innFields" class="id-fields" hidden>
+          <label for="inn">Ваш ИНН</label>
+          <input type="text" id="inn" name="inn" placeholder="000000000000" pattern="\d{10}|\d{12}">
+        </div>
+
+        <div id="passportFields" class="id-fields" hidden>
+          <label for="passport">Серия и номер паспорта</label>
+          <input type="text" id="passport" name="passport" placeholder="0000 000000" pattern="\d{4} \d{6}">
+        </div>
+
+        <div id="driverFields" class="id-fields" hidden>
+          <label for="driver">Серия и номер ВУ</label>
+          <input type="text" id="driver" name="driver" placeholder="00 00 000000" pattern="\d{2} \d{2} \d{6}">
+        </div>
       </fieldset>
 
-      <button type="submit">Отправить заявление</button>
-    </form>
-  </main>
-</body>
-</html>
+      <!-- Адрес регистрации -->
+      <div>
+        <label class="required" for="regStreet">Ваш адрес регистрации</label>
+
+        <div class="mb">
+          <input type="text" id="regStreet" name="regStreet" placeholder="Улица, дом, квартира" required>
+          <small>Улица, дом, квартира</small>
+        </div>
+
+        <div class="grid-3">
+          <div>
+            <input type="text" id="regCity" name="regCity" placeholder="Город" required>
+            <small>Город</small>
+          </div>
+          <div>
+            <input type="text" id="regPostal" name="regPostal" placeholder="Почтовый индекс" required>
+            <small>Почтовый индекс</small>
+          </div>
+          <div>
+            <input type="text" id="regCountry" name="regCountry" value="Россия" placeholder="Страна" required>
+            <small>Страна</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Совпадает / не совпадает -->
+      <fieldset>
+        <legend>Адрес фактического проживания совпадает с адресом регистрации</legend>
+        <div class="radio-group">
+          <label><input type="radio" name="sameAddress" value="yes" checked> Да</label>
+          <label><input type="radio" name="sameAddress" value="no"> Нет</label>
+        </div>
+
+        <!-- Фактический адрес -->
+        <div id="factAddress" class="address-fields" hidden>
+          <label class="required" for="factStreet">Ваш адрес фактического проживания</label>
+
+          <div class="mb">
+            <input type="text" id="factStreet" name="factStreet" placeholder="Улица, дом, квартира">
+            <small>Улица, дом, квартира</small>
+          </div>
+
+          <div class="grid-3">
+            <div>
+              <input type="text" id="factCity" name="factCity" placeholder="Город">
+              <small>Город</small>
+            </div>
+            <div>
+              <input type="text" id="factPostal" name="factPostal" placeholder="Почтовый индекс">
+              <small>Почтовый индекс</small>
+            </div>
+            <div>
+                <input type="text" id="factCountry" name="factCountry" value="Россия" placeholder="Страна" required>
+                <small>Страна</small>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Контакты -->
+      <div>
+        <label class="required" for="phone">Ваш телефон</label>
+        <input type="tel" id="phone" name="phone" placeholder="+7(000) 000-00-00" required>
+        <small>Пожалуйста, введите действующий номер телефона.</small>
+      </div>
+
+      <div>
+        <label for="email">Ваша электронная почта</label>
+        <input type="email" id="email" name="email" placeholder="example@example.ru">
+      </div>
+
+      <!-- Сведения о втором родителе-->
+           <h2 class="section-title">Сведения о втором родителе</h2>
+
+           <!-- Имя 2-го родителя -->
+           <div>
+             <label class="required" for="p2FirstName">Имя второго родителя</label>
+             <div class="grid-3">
+               <div>
+                 <input type="text" id="p2FirstName" name="p2FirstName" placeholder="Имя" required>
+                 <small>Имя</small>
+               </div>
+               <div>
+                 <input type="text" id="p2MiddleName" name="p2MiddleName" placeholder="Отчество">
+                 <small>Отчество</small>
+               </div>
+               <div>
+                 <input type="text" id="p2LastName" name="p2LastName" placeholder="Фамилия" required>
+                 <small>Фамилия</small>
+               </div>
+             </div>
+           </div>
+
+           <!-- Дата рождения 2-го родителя -->
+           <div>
+             <label class="required" for="p2BirthDate">Дата рождения</label>
+             <input type="date" id="p2BirthDate" name="p2BirthDate" placeholder="ДД.ММ.ГГГГ" required>
+           </div>
+
+           <!-- Место рождения 2-го родителя -->
+           <div>
+             <label class="required">Место рождения второго родителя</label>
+             <div class="grid-3">
+               <div>
+                 <input type="text" id="p2City" name="p2City" placeholder="Город" required>
+                 <small>Город</small>
+               </div>
+               <div>
+                 <input type="text" id="p2Region" name="p2Region" placeholder="Область" required>
+                 <small>Область</small>
+               </div>
+               <div>
+                 <input type="text" id="p2Country" name="p2Country" placeholder="Страна" required>
+                 <small>Страна</small>
+               </div>
+             </div>
+           </div>
+
+           <!-- Идентификатор 2-го родителя -->
+           <fieldset>
+             <legend>Идентификатор второго родителя</legend>
+
+             <div class="radio-group">
+               <label><input type="radio" name="p2IdType" value="snils" checked> СНИЛС</label>
+               <label><input type="radio" name="p2IdType" value="inn"> ИНН</label>
+               <label><input type="radio" name="p2IdType" value="passport"> серия и номер паспорта</label>
+               <label><input type="radio" name="p2IdType" value="driver"> серия и номер водительского удостоверения</label>
+               <label><input type="radio" name="p2IdType" value="none"> нет сведений</label>
+             </div>
+
+             <!-- СНИЛС -->
+             <div id="p2snilsFields" class="p2-id-fields">
+               <label for="p2Snils">СНИЛС второго родителя</label>
+               <input type="text" id="p2Snils" name="p2Snils"
+                      placeholder="000-000-000 00"
+                      pattern="\d{3}-\d{3}-\d{3} \d{2}">
+             </div>
+
+             <!-- ИНН -->
+             <div id="p2innFields" class="p2-id-fields" hidden>
+               <label for="p2Inn">ИНН второго родителя</label>
+               <input type="text" id="p2Inn" name="p2Inn"
+                      placeholder="000000000000"
+                      pattern="\d{10}|\d{12}">
+             </div>
+
+             <!-- Паспорт -->
+             <div id="p2passportFields" class="p2-id-fields" hidden>
+               <label for="p2Passport">Серия и номер паспорта второго родителя</label>
+               <input type="text" id="p2Passport" name="p2Passport"
+                      placeholder="0000 000000"
+                      pattern="\d{4} \d{6}">
+             </div>
+
+             <!-- ВУ -->
+             <div id="p2driverFields" class="p2-id-fields" hidden>
+               <label for="p2Driver">Серия и номер ВУ второго родителя</label>
+               <input type="text" id="p2Driver" name="p2Driver"
+                      placeholder="00 00 000000"
+                      pattern="\d{2} \d{2} \d{6}">
+             </div>
+           </fieldset>
+           <!-- 1. Известен ли адрес? -->
+               <fieldset>
+                 <legend>Адрес второго родителя известен</legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="p2AddressKnown" value="yes" checked> Да</label>
+                   <label><input type="radio" name="p2AddressKnown" value="no"> Нет</label>
+                 </div>
+               </fieldset>
+
+               <!-- 2. Фактический адрес (показывается, если p2AddressKnown = yes) -->
+               <div id="p2FactWrap" hidden>
+                 <label class="required" for="p2FactStreet">Адрес фактического проживания второго родителя</label>
+
+                 <div class="mb">
+                   <input type="text" id="p2FactStreet" name="p2FactStreet" placeholder="Улица, дом, квартира">
+                   <small>Улица, дом, квартира</small>
+                 </div>
+
+                 <div class="grid-3">
+                   <div>
+                     <input type="text" id="p2FactCity" name="p2FactCity" placeholder="Город">
+                     <small>Город</small>
+                   </div>
+                   <div>
+                     <input type="text" id="p2FactPostal" name="p2FactPostal" placeholder="Почтовый индекс">
+                     <small>Почтовый индекс</small>
+                   </div>
+                   <div>
+                       <input type="text" id="p2FactCountry" name="p2FactCountry" value="Россия" placeholder="Страна" required>
+                       <small>Страна</small>
+                   </div>
+                 </div>
+
+                 <!-- 2-а. Совпадает ли с регистрацией? -->
+                 <fieldset>
+                   <legend>Адрес фактического проживания совпадает с адресом регистрации</legend>
+                   <div class="radio-group">
+                     <label><input type="radio" name="p2Same" value="yes" checked> Да</label>
+                     <label><input type="radio" name="p2Same" value="no"> Нет</label>
+                   </div>
+
+                   <!-- 2-б. Адрес регистрации (показывается, если p2Same = no) -->
+                   <div id="p2RegWrap" class="address-fields" hidden>
+                     <label class="required" for="p2RegStreet">Адрес регистрации второго родителя</label>
+
+                     <div class="mb">
+                       <input type="text" id="p2RegStreet" name="p2RegStreet" placeholder="Улица, дом, квартира">
+                       <small>Улица, дом, квартира</small>
+                     </div>
+
+                     <div class="grid-3">
+                       <div>
+                         <input type="text" id="p2RegCity" name="p2RegCity" placeholder="Город">
+                         <small>Город</small>
+                       </div>
+                       <div>
+                         <input type="text" id="p2RegPostal" name="p2RegPostal" placeholder="Почтовый индекс">
+                         <small>Почтовый индекс</small>
+                       </div>
+                       <div>
+                           <input type="text" id="p2RegCountry" name="p2RegCountry" value="Россия" placeholder="Страна" required>
+                           <small>Страна</small>
+                       </div>
+                     </div>
+                   </div>
+                 </fieldset>
+               </div>
+               
+               <fieldset>
+                 <legend>Сведения о месте работы и размере дохода второго родителя</legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="p2WorkInfo" value="both"  checked> Знаю место работы и доход</label>
+                   <label><input type="radio" name="p2WorkInfo" value="work"> Знаю место работы, но не знаю доход</label>
+                   <label><input type="radio" name="p2WorkInfo" value="income"> Знаю примерный размер дохода, но не знаю точное место работы</label>
+                   <label><input type="radio" name="p2WorkInfo" value="none"> Не знаю ни место работы, ни размер дохода</label>
+                 </div>
+               </fieldset>
+               
+                 <!-- блок: места работы -->
+                 <div id="workBlock">
+                   <label class="required">Сведения о месте работы второго родителя</label>
+
+                   <!-- ①  Сетка – тут ТОЛЬКО input-поля -->
+                   <div id="workRows">
+                     <input type="text" name="p2WorkName[]" placeholder="Место работы">
+                     <input type="text" name="p2WorkInn[]"  placeholder="ИНН">
+                   </div>             <!--  ← закрыли #workRows -->
+
+                   <!-- ②  Кнопки теперь отдельным flex-контейнером под сеткой -->
+                   <div class="btn-row">
+                     <button type="button" id="addWorkRow">Добавить место работы</button>
+                     <button type="button" id="removeWorkRow" class="btn-danger" hidden>Удалить</button>
+                   </div>
+                 </div>
+                 
+               <!-- блок: доход -->
+               <div id="incomeBlock" class="address-fields">
+                 <label class="required" for="p2Income">Размер дохода второго родителя</label>
+                 <input type="text" id="p2Income" name="p2Income" placeholder="200 000">
+                 <small>Укажите известный или предполагаемый размер дохода&nbsp;в месяц, руб.</small>
+               </div>
+
+               <!-- блок: доп сведения -->
+               <div>
+                 <label class="required" for="addInfo">Дополнительные сведения о доходах</label>
+
+                 <!-- минимум 4 строки, ширина 100 %, растягивается только вниз -->
+                 <textarea id="addInfo"
+                           name="addInfo"
+                           rows="8"
+                           placeholder="Второй родитель дополнительно получает доход от сдачи квартиры в аренду (20 000 руб. в месяц), а также ежегодные дивиденды от владения акциями ПАО «Газпром» (примерно 45 000 руб. в год). Кроме того, получает ежеквартальные бонусы на основной работе, размер которых варьируется (в среднем 30 000 руб. в квартал). Известно также о наличии доли в ООО, сведения о доходах по которой отсутствуют, но есть основания полагать, что доход имеется."
+                           style="width:100%; resize:vertical;"></textarea>
+
+                 <small>Дополнительные доходы второго родителя. Если нет информации, поле можно оставить пустым.</small>
+               </div>
+               
+               <!-- Контакты -->
+               <div>
+                 <label class="required" for="p2phone">Телефон второго родителя (если известен)</label>
+                 <input type="tel" id="p2phone" name="p2phone" placeholder="+7(000) 000-00-00" required>
+                 <small>Пожалуйста, введите действующий номер телефона.</small>
+               </div>
+
+               <div>
+                 <label for="p2email">Электронная почта второго родителя (если известна)</label>
+                 <input type="email" id="p2email" name="p2email" placeholder="example@example.ru">
+               </div>
+
+               
+               <!-- ========  Сведения о детях  ======== -->
+               <h2 class="section-title">Сведения о детях</h2>
+
+               <!-- обёртка всего раздела -->
+               <div id="kidsBlock">
+
+                 <!-- счётчик -->
+                 <div class="count-wrap">
+                   <label class="required" for="kidsCount">Количество детей</label>
+                   <input  type="number" id="kidsCount" name="kidsCount"
+                           value="1" min="1" placeholder="1">
+                   <small>Введите количество несовершеннолетних детей, для которых устанавливаются алименты</small>
+                 </div>
+                 
+                 <!-- поле 'Сведения о ребёнке' (добавляем строки JS-ом) -->
+                 <div id="kidsRows"></div>
+
+                 <!-- кнопки -->
+                 <div class="btn-row">
+                   <button type="button" id="addKidRow">Добавить ребёнка</button>
+                   <button type="button" id="removeKidRow" class="btn-danger" hidden>Удалить</button>
+                 </div>
+               </div>
+               
+               
+               <!-- ========  Сведения о браке  ======== -->
+               <h2 class="section-title">Сведения о браке</h2>
+               <!-- Дата рождения заключения брака -->
+               <div>
+                 <label for="marriageDate">Дата заключения брака</label>
+                 <input type="date" id="marriageDate" name="marriageDate" placeholder="ДД.ММ.ГГГГ" required>
+               </div>
+               <!-- Дата расторжения брака -->
+               <div>
+                 <label for="divorseDate">Дата расторжения брака (если был расторгнут)</label>
+                 <input type="date" id="divorseDate" name="divorseDate" placeholder="ДД.ММ.ГГГГ" required>
+               </div>
+               
+               <fieldset>
+                 <legend>Ребенок живет с Вами и находится на Вашем содержании</legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="kidLivesWithYou" value="yes"> Да</label>
+                   <label><input type="radio" name="kidLivesWithYou" value="no"> Нет</label>
+                 </div>
+               </fieldset>
+               
+               <fieldset>
+                 <legend>Есть ли спор со вторым родителем в отношении алиментов?</legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="hasAlimonyDispute" value="yes"> Да</label>
+                   <label><input type="radio" name="hasAlimonyDispute" value="no"> Нет</label>
+                 </div>
+               </fieldset>
+               
+               <!-- ========  Другие дети второго родителя  ======== -->
+               <fieldset>
+                 <legend>Есть ли у второго родителя другие дети? <span class="required"></span></legend>
+
+                 <div class="radio-group">
+                   <label><input type="radio" name="otherKids" value="yes" checked> Да</label>
+                   <label><input type="radio" name="otherKids" value="no"> Нет</label>
+                 </div>
+               </fieldset>
+               
+               <!-- счётчик -->
+               <div id="otherKidsWrap" class="count-wrap">
+                 <label class="required" for="otherKidsCount">Укажите количество других детей</label>
+                 <input  type="number" id="otherKidsCount" name="otherKidsCount" value="0" min="0">
+                 <small>Укажите других несовершеннолетних детей</small>
+               </div>
+               
+               <!-- ========  Форма алиментов  ======== -->
+               <fieldset>
+                 <legend>Требуется ли установить алименты в твердой сумме?</legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="needFixAlimony" value="yes"> Да</label>
+                   <label><input type="radio" name="needFixAlimony" value="no"> Нет</label>
+                 </div>
+                 <small>(По умолчанию алименты устанавливаются как процент от заработка)</small>
+               </fieldset>
+               
+               <!-- ========  Алименты за прошлое время  ======== -->
+               <fieldset>
+                 <legend>Требуется ли взыскать алименты за прошедшее время?</legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="alimonyPastPeriod" value="yes"> Да</label>
+                   <label><input type="radio" name="alimonyPastPeriod" value="no"> Нет</label>
+                   <small>(По умолчанию алименты взыскиваются с даты обращения в суд)</small>
+                 </div>
+               </fieldset>
+               
+               <!-- ======== Дело в отсутствие сторон ======== -->
+               <fieldset>
+                 <legend>Хотели бы вы, чтобы дело рассматривалось без вашего личного участия?</legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="withoutPersonalPresence" value="yes"> Да</label>
+                   <label><input type="radio" name="withoutPersonalPresence" value="no"> Нет</label>
+                 </div>
+               </fieldset>
+               
+               <!-- ======================  К Н О П К А  ====================== -->
+               <button type="submit">Отправить заявление</button>
+             </form>
+           </main>
+
+           <script>
+             /* ---------- 1. идентификатор заявителя ---------- */
+             const idRadios=document.querySelectorAll('input[name="idType"]');
+             const idGroups=document.querySelectorAll('.id-fields');
+             function toggleIdFields(){
+               idGroups.forEach(g=>g.hidden=true);
+               const active=document.querySelector('input[name="idType"]:checked');
+               if(active)document.getElementById(active.value+'Fields').hidden=false;
+             }
+             idRadios.forEach(r=>r.addEventListener('change',toggleIdFields));
+             toggleIdFields();
+
+             /* ---------- 2. идентификатор второго родителя ---------- */
+             const p2Radios=document.querySelectorAll('input[name="p2IdType"]');
+             const p2Groups=document.querySelectorAll('.p2-id-fields');
+             function toggleP2IdFields(){
+               p2Groups.forEach(g=>g.hidden=true);
+               const active=document.querySelector('input[name="p2IdType"]:checked');
+               if(!active||active.value==='none')return;
+               document.getElementById('p2'+active.value+'Fields').hidden=false;
+             }
+             p2Radios.forEach(r=>r.addEventListener('change',toggleP2IdFields));
+             toggleP2IdFields();
+
+             /* ---------- 3. адрес заявителя (у вас уже был) ---------- */
+             const addrRadios=document.querySelectorAll('input[name="sameAddress"]');
+             const factBlock=document.getElementById('factAddress');
+             function toggleAddress(){
+               const isSame=document.querySelector('input[name="sameAddress"]:checked').value==='yes';
+               factBlock.hidden=isSame;
+             }
+             addrRadios.forEach(r=>r.addEventListener('change',toggleAddress));
+             toggleAddress();
+
+             /* ---------- 4. адрес второго родителя ---------- */
+             const p2KnownRadios=document.querySelectorAll('input[name="p2AddressKnown"]');
+             const p2FactWrap=document.getElementById('p2FactWrap');
+             function toggleP2Known(){
+               const known=document.querySelector('input[name="p2AddressKnown"]:checked').value==='yes';
+               p2FactWrap.hidden=!known;
+             }
+             p2KnownRadios.forEach(r=>r.addEventListener('change',toggleP2Known));
+             toggleP2Known();
+
+             /* 4-а. совпадение фактического и регистрационного для второго родителя */
+             const p2SameRadios=document.querySelectorAll('input[name="p2Same"]');
+             const p2RegWrap=document.getElementById('p2RegWrap');
+             function toggleP2Same(){
+               const same=document.querySelector('input[name="p2Same"]:checked').value==='yes';
+               p2RegWrap.hidden=same;
+             }
+             p2SameRadios.forEach(r=>r.addEventListener('change',toggleP2Same));
+             toggleP2Same();
+             
+             /* ---------- 5. место работы / доход второго родителя ---------- */
+             const workInfoRadios = document.querySelectorAll('input[name="p2WorkInfo"]');
+             const workBlock      = document.getElementById('workBlock');
+             const incomeBlock    = document.getElementById('incomeBlock');
+
+             function toggleWorkIncome(){
+               const v = document.querySelector('input[name="p2WorkInfo"]:checked').value;
+               workBlock.hidden   = (v === 'income' || v === 'none');
+               incomeBlock.hidden = (v === 'work'   || v === 'none');
+             }
+             workInfoRadios.forEach(r => r.addEventListener('change', toggleWorkIncome));
+             toggleWorkIncome();
+
+             /* ---------- 5-a. добавить / удалить строку «место-ИНН» ---------- */
+             const workRows   = document.getElementById('workRows');
+             const addBtn     = document.getElementById('addWorkRow');
+             const removeBtn  = document.getElementById('removeWorkRow');
+
+             const initialPairs = workRows.childElementCount / 2;   // сколько пар было при загрузке
+
+             function updateRemoveVisibility(){
+               const pairs = workRows.childElementCount / 2;
+               removeBtn.hidden = pairs <= initialPairs;
+             }
+
+             /* добавить строку */
+             addBtn.addEventListener('click', () => {
+               const name = document.createElement('input');
+               name.type        = 'text';
+               name.name        = 'p2WorkName[]';
+               name.placeholder = 'Место работы';
+
+               const inn  = document.createElement('input');
+               inn.type        = 'text';
+               inn.name        = 'p2WorkInn[]';
+               inn.placeholder = 'ИНН';
+
+               workRows.append(name, inn);   // сетка отправит их в новую строку
+               updateRemoveVisibility();
+             });
+
+             /* удалить последнюю добавленную строку */
+             removeBtn.addEventListener('click', () => {
+               const pairs = workRows.childElementCount / 2;
+               if (pairs > initialPairs) {
+                 workRows.removeChild(workRows.lastElementChild);   // удаляем ИНН
+                 workRows.removeChild(workRows.lastElementChild);   // удаляем место
+                 updateRemoveVisibility();
+               }
+             });
+
+             updateRemoveVisibility();  // первичная инициализация
+             
+             
+             /* ---------- 6. авто-подгон высоты textarea ---------- */
+             (function(){
+               const ta = document.getElementById('addInfo');
+
+               function fit(el){
+                 el.style.height = 'auto';          // сбрасываем
+                 el.style.height = el.scrollHeight + 'px';
+               }
+
+               fit(ta);                             // плейсхолдер на старте
+               ta.addEventListener('input', () => fit(ta));
+             })();
+               
+               /* ---------- 7. сведения о детях ---------- */
+               const kidsRows     = document.getElementById('kidsRows');
+               const addKidBtn    = document.getElementById('addKidRow');
+               const removeKidBtn = document.getElementById('removeKidRow');
+               const kidsCountInp = document.getElementById('kidsCount');
+
+               /* создаём DOM-блок из 5 полей (2 строки) */
+               function createKidRow(){
+                 const row = document.createElement('div');
+                 row.className = 'kid-row';
+
+                 /* первая строка: Имя / Отчество / Фамилия */
+                 const line1 = document.createElement('div');
+                 line1.className = 'grid-3';
+                 line1.append(
+                   Object.assign(document.createElement('input'), {type:'text', name:'kidFirstName[]',  placeholder:'Имя'}),
+                   Object.assign(document.createElement('input'), {type:'text', name:'kidMiddleName[]', placeholder:'Отчество'}),
+                   Object.assign(document.createElement('input'), {type:'text', name:'kidLastName[]',   placeholder:'Фамилия'})
+                 );
+
+                 /* вторая строка: Дата рождения / Свидетельство */
+                 const line2 = document.createElement('div');
+                 line2.className = 'grid-2';
+                 line2.append(
+                   Object.assign(document.createElement('input'), {type:'date', name:'kidBirthDate[]', placeholder:'ДД-ММ-ГГГГ'}),
+                   Object.assign(document.createElement('input'), {type:'text', name:'kidCert[]',      placeholder:'I-ГЮ № …'})
+                 );
+
+                 row.append(line1, line2);
+                 return row;
+               }
+
+               function updateKidsUI(){
+                 const n = kidsRows.childElementCount;   // 1 kid-row = 1 ребёнок
+                 kidsCountInp.value = n;
+                 removeKidBtn.hidden = n <= 1;           // «Удалить» прячем, когда один
+               }
+
+               /* добавить ребёнка */
+               function addKid(){
+                 kidsRows.appendChild(createKidRow());
+                 updateKidsUI();
+               }
+
+               /* удалить последнего ребёнка */
+               function removeKid(){
+                 if (kidsRows.childElementCount > 1){
+                   kidsRows.removeChild(kidsRows.lastElementChild);
+                   updateKidsUI();
+                 }
+               }
+
+               addKidBtn   .addEventListener('click', addKid);
+               removeKidBtn.addEventListener('click', removeKid);
+
+               /* инициализация: сразу один ребёнок */
+               addKid();
+               
+               /* ---------- 8. другие дети второго родителя ---------- */
+               document.addEventListener('DOMContentLoaded', () => {
+                 const otherKidsRadios = document.querySelectorAll('input[name="otherKids"]');
+                 const otherKidsWrap   = document.getElementById('otherKidsWrap');
+
+                 function toggleOtherKids() {
+                   const show = document.querySelector('input[name="otherKids"]:checked').value === 'yes';
+                 
+                    otherKidsWrap.style.display = show ? 'block' : 'none';
+                 }
+
+                 otherKidsRadios.forEach(r => r.addEventListener('change', toggleOtherKids));
+                 toggleOtherKids();                       // первичная инициализация
+               });
+               
+             </script>
+           </script>
+           </body>
+           </html>

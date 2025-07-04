@@ -1,0 +1,119 @@
+    /* ---------- переменные ---------- */
+    :root{
+      --clr-bg:#f8f9fa;
+      --clr-primary:#0d6efd;
+      --clr-text:#212529;
+      --clr-muted:#6c757d;
+      --radius:.375rem;
+    }
+
+  /* базовая типографика и фон */
+  body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,
+      sans-serif;
+      background:var(--clr-bg);
+      color:var(--clr-text);
+      line-height:1.5;
+  }
+  .container{max-width:960px;padding:2rem 1rem;margin:0 auto;background:#fff;}
+
+  /* ---------- заголовки ---------- */
+  h1{font-size:2rem;margin:0 0 .5rem;}
+  h2{font-size:1.25rem;margin:0;}
+  /* линия под <h2> */
+  h2.section-title{position:relative;margin:2rem 0 .5rem;padding-bottom:.5rem;}
+  h2.section-title::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:#e2e5e9;}
+
+  /* ---------- внутренние отступы ---------- */
+  #p2FactWrap > fieldset{
+    margin-top: 1.5rem;
+  }
+  
+  /* строка «место работы / ИНН» */
+  #workRows{
+      display:grid;
+      gap:1rem;                       /* и горизонтальный, и вертикальный */
+      grid-template-columns:repeat(2,1fr);  /* ровно две колонки */
+  }
+  /* двухколоночная сетка для строки «место работы / ИНН» */
+  .grid-2{
+      display:grid;
+      gap:1rem;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+      margin-bottom:10px;
+  }
+    
+
+    
+  /* сетки */
+  form{display:grid;gap:1.5rem;}
+  .grid-3{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
+  /* сетка для блока детей: 5 ячеек в строке, красиво перепадаёт на узких экранах */
+  .kid-row{
+    display:grid;
+    gap:1rem;               /* расстояние между строками ребёнка */
+    margin:1.5rem 0;   /* сверху/снизу 1.5 rem, слева/справа 0     */
+  }
+    
+  /* элементы формы */
+  label,
+  legend{display:block;font-size:.875rem;margin-bottom:.25rem;}
+  input[type="text"],
+  input[type="date"],
+  input[type="tel"],
+  input[type="email"],
+  select, textarea{
+    width:100%;padding:.5rem .75rem;border:1px solid #ced4da;border-radius:var(--radius);
+    font-size:1rem;box-sizing:border-box;
+    resize:vertical;          /* тянется только вниз, ширина фиксирована */
+  }
+  input[type="radio"]{margin-right:.5rem;}
+
+  fieldset{border:none;padding:0;margin:0;}
+  .radio-group{display:flex;flex-direction:column;gap:.5rem;}
+
+  .id-fields,.p2-id-fields,.address-fields{margin:1.5rem 0;}
+  .required::after{content:" *";color:var(--clr-primary);}
+  .mb{margin-bottom:1rem;}
+
+  /* ---------- кнопки ---------- */
+  button{width:fit-content;padding:.5rem 1.25rem;font-size:1rem;color:#fff;
+         background:var(--clr-primary);border:none;border-radius:var(--radius);cursor:pointer;}
+  button:hover{background:#0954d6;}
+  /* ---------- КНОПКИ «добавить / удалить место работы» ---------- */
+  .btn-row{
+    display:flex;
+    gap:1rem;
+    margin-top:1rem;
+  }
+  .btn-row button{
+    padding:.5rem 1rem;
+    font-size:.875rem;
+  }
+    .btn-danger{
+      background:#dc3545;                /* красный Bootstrap */
+    }
+    .btn-danger:hover{
+      background:#b02a37;                /* чуть темнее при наведении */
+    }
+/* ---------- счетчик ---------- */
+.count-wrap{
+  display:flex;
+  flex-direction:column;
+  gap:.25rem;           /* расстояние между label / input / small */
+  max-width:200px;      /* не растягивать на всю строку формы */
+  margin-bottom:1.5rem; /* такой же вертикальный интервал, как у .mb */
+}
+
+/* сам счётчик: сделаем пошире и центрируем цифры */
+.count-wrap input[type="number"]{
+  width:8rem;          /* нужная ширина */
+  text-align:center;   /* цифра по центру */
+  font-size:1.125rem;  /* чуть крупнее остальных полей */
+}
+/* новое правило: подсказка всегда на новой строке */
+.count-wrap small{
+  display:block;       /* перенос под input */
+  margin-top:.25rem;   /* тот же отступ, что и gap у .count-wrap */
+}
