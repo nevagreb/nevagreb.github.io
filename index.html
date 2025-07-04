@@ -1,1 +1,172 @@
-Hello world
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Заявление о взыскании алиментов</title>
+  <style>
+    :root {
+      --clr-bg: #f8f9fa;
+      --clr-primary: #0d6efd;
+      --clr-text: #212529;
+      --clr-muted: #6c757d;
+      --radius: .375rem;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 960px;
+      padding: 2rem 1rem;
+      margin: 0 auto;
+      background: #fff;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin: 0 0 .5rem;
+    }
+
+    p.lead {
+      margin: 0 0 2rem;
+      color: var(--clr-muted);
+    }
+
+    /* ----- form layout ----- */
+    form {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    label {
+      display: block;
+      font-size: .875rem;
+      margin-bottom: .25rem;
+    }
+
+    input[type="text"],
+    input[type="date"] {
+      width: 100%;
+      padding: .5rem .75rem;
+      border: 1px solid #ced4da;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    input[type="radio"] {
+      margin-right: .5rem;
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-top: .5rem;
+    }
+
+    .required::after {
+      content: " *";
+      color: var(--clr-primary);
+    }
+
+    button {
+      width: fit-content;
+      padding: .5rem 1.25rem;
+      font-size: 1rem;
+      color: #fff;
+      background: var(--clr-primary);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0954d6;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Готовим заявление о взыскании алиментов</h1>
+    <p class="lead">Пожалуйста заполните все необходимые поля для подачи заявления на взыскание алиментов.</p>
+
+    <form>
+      <!-- Имя -->
+      <div>
+        <label class="required" for="firstName">Ваше имя</label>
+        <div class="grid-3">
+          <div>
+            <input type="text" id="firstName" name="firstName" placeholder="Имя" required>
+            <small>Имя</small>
+          </div>
+          <div>
+            <input type="text" id="middleName" name="middleName" placeholder="Отчество">
+            <small>Отчество</small>
+          </div>
+          <div>
+            <input type="text" id="lastName" name="lastName" placeholder="Фамилия" required>
+            <small>Фамилия</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Дата рождения -->
+      <div>
+        <label class="required" for="birthDate">Дата рождения</label>
+        <input type="date" id="birthDate" name="birthDate" placeholder="ДД.ММ.ГГГГ" required>
+      </div>
+
+      <!-- Место рождения -->
+      <div>
+        <label class="required">Ваше место рождения</label>
+        <div class="grid-3">
+          <div>
+            <input type="text" name="city" placeholder="Город" required>
+            <small>Город</small>
+          </div>
+          <div>
+            <input type="text" name="region" placeholder="Область" required>
+            <small>Область</small>
+          </div>
+          <div>
+            <input type="text" name="country" placeholder="Страна" required>
+            <small>Страна</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Идентификатор -->
+      <fieldset>
+        <legend>Идентификатор</legend>
+        <div class="radio-group">
+          <label><input type="radio" name="idType" value="snils"> СНИЛС</label>
+          <label><input type="radio" name="idType" value="inn"> ИНН</label>
+          <label><input type="radio" name="idType" value="passport"> серия и номер паспорта</label>
+          <label><input type="radio" name="idType" value="driver"> серия и номер водительского удостоверения</label>
+        </div>
+      </fieldset>
+
+      <button type="submit">Отправить заявление</button>
+    </form>
+  </main>
+</body>
+</html>
