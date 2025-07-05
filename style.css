@@ -244,7 +244,7 @@
   transform: translateX(-50%) translateY(-110%); /* сдвигаем чуть выше */
 }
 /* галочки на главной */
-.number.checkmark {
+.number.checkmark, .checkmark {
   font-size: 1.5rem;
   color: #0d6efd;
   margin-right: 1rem;
@@ -258,19 +258,7 @@
   transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   cursor: default;
- }.checkmark {
-    width: 3rem;
-    height: 3rem;
-    background-color: #e6f0ff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-    flex-shrink: 0;
-    transition: background-color 0.3s ease;
-  }
-
+ }
   .checkmark-icon {
     width: 1.5rem;
     height: 1.5rem;
@@ -280,13 +268,11 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-
-  .feature-block:hover .checkmark-icon path {
+.feature-block:hover .checkmark-icon path {
     stroke-dasharray: 20;
     stroke-dashoffset: 20;
     animation: draw-check 0.5s ease forwards;
   }
-
   @keyframes draw-check {
     from {
       stroke-dashoffset: 20;
