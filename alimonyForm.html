@@ -16,7 +16,7 @@
   <h1>Готовим заявление о взыскании алиментов</h1>
   <p class="lead">Пожалуйста заполните все необходимые поля для подачи заявления на взыскание алиментов.</p>
 
-  <form>
+  <form id="alimonyForm">
       <!-- Имя -->
       <div>
         <label class="required" for="firstName">Ваше имя</label>
@@ -51,7 +51,7 @@
             <small>Город</small>
           </div>
           <div>
-            <input type="text" name="region" placeholder="Область" required>
+            <input type="text" name="region" placeholder="Область">
             <small>Область</small>
           </div>
           <div>
@@ -73,22 +73,22 @@
         </div>
 
         <div id="snilsFields" class="id-fields">
-          <label for="snils">Ваш СНИЛС</label>
+          <label for="snils" class="required">Ваш СНИЛС</label>
           <input type="text" id="snils" name="snils" placeholder="000-000-000 00" pattern="\d{3}-\d{3}-\d{3} \d{2}">
         </div>
 
         <div id="innFields" class="id-fields" hidden>
-          <label for="inn">Ваш ИНН</label>
+          <label for="inn" class="required">Ваш ИНН</label>
           <input type="text" id="inn" name="inn" placeholder="000000000000" pattern="\d{10}|\d{12}">
         </div>
 
         <div id="passportFields" class="id-fields" hidden>
-          <label for="passport">Серия и номер паспорта</label>
+          <label for="passport" class="required">Серия и номер паспорта</label>
           <input type="text" id="passport" name="passport" placeholder="0000 000000" pattern="\d{4} \d{6}">
         </div>
 
         <div id="driverFields" class="id-fields" hidden>
-          <label for="driver">Серия и номер ВУ</label>
+          <label for="driver" class="required">Серия и номер ВУ</label>
           <input type="text" id="driver" name="driver" placeholder="00 00 000000" pattern="\d{2} \d{2} \d{6}">
         </div>
       </fieldset>
@@ -201,7 +201,7 @@
                  <small>Город</small>
                </div>
                <div>
-                 <input type="text" id="p2Region" name="p2Region" placeholder="Область" required>
+                 <input type="text" id="p2Region" name="p2Region" placeholder="Область">
                  <small>Область</small>
                </div>
                <div>
@@ -225,7 +225,7 @@
 
              <!-- СНИЛС -->
              <div id="p2snilsFields" class="p2-id-fields">
-               <label for="p2Snils">СНИЛС второго родителя</label>
+               <label for="p2Snils" class="required">СНИЛС второго родителя</label>
                <input type="text" id="p2Snils" name="p2Snils"
                       placeholder="000-000-000 00"
                       pattern="\d{3}-\d{3}-\d{3} \d{2}">
@@ -233,7 +233,7 @@
 
              <!-- ИНН -->
              <div id="p2innFields" class="p2-id-fields" hidden>
-               <label for="p2Inn">ИНН второго родителя</label>
+               <label for="p2Inn" class="required">ИНН второго родителя</label>
                <input type="text" id="p2Inn" name="p2Inn"
                       placeholder="000000000000"
                       pattern="\d{10}|\d{12}">
@@ -241,7 +241,7 @@
 
              <!-- Паспорт -->
              <div id="p2passportFields" class="p2-id-fields" hidden>
-               <label for="p2Passport">Серия и номер паспорта второго родителя</label>
+               <label for="p2Passport" class="required">Серия и номер паспорта второго родителя</label>
                <input type="text" id="p2Passport" name="p2Passport"
                       placeholder="0000 000000"
                       pattern="\d{4} \d{6}">
@@ -249,7 +249,7 @@
 
              <!-- ВУ -->
              <div id="p2driverFields" class="p2-id-fields" hidden>
-               <label for="p2Driver">Серия и номер ВУ второго родителя</label>
+               <label for="p2Driver" class="required">Серия и номер ВУ второго родителя</label>
                <input type="text" id="p2Driver" name="p2Driver"
                       placeholder="00 00 000000"
                       pattern="\d{2} \d{2} \d{6}">
@@ -359,8 +359,21 @@
 
                <!-- блок: доп сведения -->
                <div>
-                 <label class="required" for="addInfo">Дополнительные сведения о доходах</label>
-
+                   <label for="addInfo">
+                     Дополнительные сведения о доходах
+                     <span class="tooltip-wrap">
+                       <span class="tooltip-icon">?</span>
+                       <span class="tooltip-text">
+                           Укажите любую дополнительную информацию, которая может иметь значение для расчета размера алиментов. Это могут быть:
+                           <br>- сведения о наличии дополнительных доходов (например, от сдачи имущества в аренду, фриланса, подработок);
+                           <br>- дивиденды от акций, долей в бизнесе или иных инвестициях;
+                           <br>- премии, бонусы, компенсации и иные нерегулярные выплаты;
+                           <br>- сведения о материальных благах (например, служебный транспорт, жилье);
+                           <br>- любые другие источники средств, которые могут рассматриваться как доход.
+                       </span>
+                     </span>
+                   </label>
+                   
                  <!-- минимум 4 строки, ширина 100 %, растягивается только вниз -->
                  <textarea id="addInfo"
                            name="addInfo"
@@ -373,8 +386,8 @@
                
                <!-- Контакты -->
                <div>
-                 <label class="required" for="p2phone">Телефон второго родителя (если известен)</label>
-                 <input type="tel" id="p2phone" name="p2phone" placeholder="+7(000) 000-00-00" required>
+                 <label for="p2phone">Телефон второго родителя (если известен)</label>
+                 <input type="tel" id="p2phone" name="p2phone" placeholder="+7(000) 000-00-00">
                  <small>Пожалуйста, введите действующий номер телефона.</small>
                </div>
 
@@ -414,33 +427,69 @@
                <!-- Дата рождения заключения брака -->
                <div>
                  <label for="marriageDate">Дата заключения брака</label>
-                 <input type="date" id="marriageDate" name="marriageDate" placeholder="ДД.ММ.ГГГГ" required>
+                 <input type="date" id="marriageDate" name="marriageDate" placeholder="ДД.ММ.ГГГГ">
                </div>
                <!-- Дата расторжения брака -->
                <div>
                  <label for="divorseDate">Дата расторжения брака (если был расторгнут)</label>
-                 <input type="date" id="divorseDate" name="divorseDate" placeholder="ДД.ММ.ГГГГ" required>
+                 <input type="date" id="divorseDate" name="divorseDate" placeholder="ДД.ММ.ГГГГ">
                </div>
                
+               <!-- ========  Дополнительные сведения  ======== -->
+               <h2 class="section-title">Дополнительные сведения</h2>
+               
                <fieldset>
-                 <legend>Ребенок живет с Вами и находится на Вашем содержании</legend>
+                 <legend>
+                   Ребенок живет с вами и находится на вашем содержании?
+                   <span class="required"></span>
+                   <span class="tooltip-wrap">
+                     <span class="tooltip-icon">?</span>
+                     <span class="tooltip-text">
+                         Алименты взыскиваются в пользу того родителя, который фактически:
+                         <br>- содержит ребёнка
+                         <br>- несёт основные расходы
+                         <br>- обеспечивает уход, питание, одежду и т.п.
+                     </span>
+                   </span>
+                 </legend>
                  <div class="radio-group">
                    <label><input type="radio" name="kidLivesWithYou" value="yes"> Да</label>
                    <label><input type="radio" name="kidLivesWithYou" value="no"> Нет</label>
                  </div>
                </fieldset>
                
+               <!-- ======== Установление отцовства ======== -->
                <fieldset>
-                 <legend>Есть ли спор со вторым родителем в отношении алиментов?</legend>
+                 <legend>Нужно ли устанавливать отцовство?<span class="required"></span>
+                     <span class="tooltip-wrap">
+                       <span class="tooltip-icon">?</span>
+                       <span class="tooltip-text">
+                           Не нужно устанавливать отцовство, если:
+                           <br>-отец записан в свидетельстве о рождении;
+                           <br>-было заключено официальное признание отцовства (даже без брака);
+                           <br>-родители были в браке на момент рождения ребёнка — в этом случае отцовство предполагается автоматически.
+                       </span>
+                     </span>
+                   </legend>
                  <div class="radio-group">
-                   <label><input type="radio" name="hasAlimonyDispute" value="yes"> Да</label>
-                   <label><input type="radio" name="hasAlimonyDispute" value="no"> Нет</label>
+                   <label><input type="radio" name="needEstablishedPaternity" value="yes"> Да</label>
+                   <label><input type="radio" name="needEstablishedPaternity" value="no"> Нет</label>
                  </div>
                </fieldset>
                
                <!-- ========  Другие дети второго родителя  ======== -->
                <fieldset>
-                 <legend>Есть ли у второго родителя другие дети? <span class="required"></span></legend>
+                   <legend>Есть ли у второго родителя другие дети? <span class="required"></span>
+                       <span class="tooltip-wrap">
+                         <span class="tooltip-icon">?</span>
+                         <span class="tooltip-text">
+                             Сумма алиментов зависит от официального дохода родителя и количества детей:
+                             <br>- на одного ребёнка — ¼ (25%) от дохода;
+                             <br>- на двух детей — ⅓ (33%);
+                             <br>- на трёх и более детей — ½ (50%).
+                         </span>
+                       </span>
+                   </legend>
 
                  <div class="radio-group">
                    <label><input type="radio" name="otherKids" value="yes" checked> Да</label>
@@ -455,29 +504,107 @@
                  <small>Укажите других несовершеннолетних детей</small>
                </div>
                
+               <div id="otherKidsAlimonyWrap">
+                 <fieldset>
+                   <legend>Есть ли судебный акт или нотариальное соглашение об оплате алиментов в пользу иных детей?<span class="required"></span></legend>
+                   <div class="radio-group">
+                     <label><input type="radio" name="otherKidsAlimony" value="yes"> Да</label>
+                     <label><input type="radio" name="otherKidsAlimony" value="no"> Нет</label>
+                   </div>
+                 </fieldset>
+               </div>
+               
                <!-- ========  Форма алиментов  ======== -->
                <fieldset>
-                 <legend>Требуется ли установить алименты в твердой сумме?</legend>
+                 <legend>Требуется ли установить алименты в твердой сумме?<span class="required"></span>
+                     <span class="tooltip-wrap">
+                       <span class="tooltip-icon">?</span>
+                       <span class="tooltip-text">
+                           По умолчанию алименты устанавливаются как процент от заработка, но могут быть взысканы в твердой денежной сумме или одновременно в долевом отношении к заработку и в твердой денежной сумме, если родитель:
+                           <br>- имеет нерегулярный, меняющийся заработок, либо
+                           <br>- получает доход полностью или частично в натуре или в иностранной валюте, либо
+                           <br>- не имеет дохода, либо
+                           <br>- получает доходы так, что взыскание алиментов в долевом отношении затруднительно, либо
+                           <br>- является менее обеспеченным родителем по сравнению с другим и дети остались при каждом из родителей.
+                           <br> Если нет серьезных препятствий для расчета алиментов как процента от заработка, лучше не требовать взыскания в твердой денежной сумме, это усложнит судебный процесс.
+                       </span>
+                     </span>
+                 </legend>
                  <div class="radio-group">
                    <label><input type="radio" name="needFixAlimony" value="yes"> Да</label>
                    <label><input type="radio" name="needFixAlimony" value="no"> Нет</label>
                  </div>
-                 <small>(По умолчанию алименты устанавливаются как процент от заработка)</small>
                </fieldset>
+               
+               <div id="fixAmountWrap" class="mb" hidden>
+                 <label for="fixAmount">Желаемая сумма алиментов в месяц (в рублях)</label>
+                 <input type="text" id="fixAmount" name="fixAmount" placeholder="например, 20 000">
+                 <small>Если Вы хотите, чтобы суд сам определил сумму — оставьте поле пустым</small>
+               </div>
                
                <!-- ========  Алименты за прошлое время  ======== -->
                <fieldset>
-                 <legend>Требуется ли взыскать алименты за прошедшее время?</legend>
+                 <legend>Требуется ли взыскать алименты за прошедшее время?
+                     <span class="required"></span>
+                     <span class="tooltip-wrap">
+                       <span class="tooltip-icon">?</span>
+                       <span class="tooltip-text">
+                           Алименты назначаются с момента обращения в суд, а не с рождения ребенка или другого момента, когда возникло право на алименты.
+                           <br>Можно получить алименты и за прошедшее время, но не более чем за 3 года до подачи иска, если есть доказательства, что вы просили помощи, а второй родитель уклонялся от уплаты.
+                           <br>Что может быть доказательством:
+                           <br>- переписка (сообщения, письма, email), где вы просили деньги;
+                           <br>- письма, отправленные через нотариуса;
+                           показания свидетелей;
+                           <br>- другие документы, подтверждающие, что вы пытались получить алименты.
+                       </span>
+                     </span>
+                   </legend>
                  <div class="radio-group">
                    <label><input type="radio" name="alimonyPastPeriod" value="yes"> Да</label>
                    <label><input type="radio" name="alimonyPastPeriod" value="no"> Нет</label>
-                   <small>(По умолчанию алименты взыскиваются с даты обращения в суд)</small>
                  </div>
                </fieldset>
                
+               <div id="pastDateWrap" class="mb" hidden>
+                 <label class="required" for="alimonyFromDate">Дата, с которой необходимо взыскать алименты</label>
+                 <input type="date" id="alimonyFromDate" name="alimonyFromDate" placeholder="ДД.ММ.ГГГГ">
+                 <small>Укажите дату, с которой Вы хотите взыскать алименты. Не ранее 3 лет до обращения в суд.</small>
+               </div>
+               
+               <!-- ======== Судебный приказ ======== -->
+               <fieldset>
+                 <legend>Судебный приказ на взыскание алиментов уже был, но он отменен<span class="required"></span>
+                     <span class="tooltip-wrap">
+                       <span class="tooltip-icon">?</span>
+                       <span class="tooltip-text">
+                           Если судебных разбирательств по алиментов еще не было - просто выберете "Нет".
+                           Если судебный приказ на взыскание алиментов был отменен в связи с поступлением от должника возражений относительно его исполнения, мы подготовим исковое заявление о взыскании алиментов.
+                       </span>
+                     </span>
+                   </legend>
+                 <div class="radio-group">
+                   <label><input type="radio" name="courtOrderHasCancelled" value="yes"> Да</label>
+                   <label><input type="radio" name="courtOrderHasCancelled" value="no"> Нет</label>
+                 </div>
+               </fieldset>
+               
+               
                <!-- ======== Дело в отсутствие сторон ======== -->
                <fieldset>
-                 <legend>Хотели бы вы, чтобы дело рассматривалось без вашего личного участия?</legend>
+                 <legend>Хотели бы вы, чтобы дело рассматривалось без вашего личного участия?<span class="required"></span>
+                     <span class="tooltip-wrap">
+                       <span class="tooltip-icon">?</span>
+                       <span class="tooltip-text">
+                           <br>Если вы не хотите лично присутствовать в суде, мы подготовим ходатайство о рассмотрении дела в ваше отсутствие. В этом случае суд рассмотрит дело на основании ваших документов и требований.
+                           <br>Это удобно, если у вас нет возможности или желания приходить в суд.
+                           <br>Важно знать:
+                           <br>- Суд может удовлетворить ваше ходатайство и рассмотреть дело без вас.
+                           <br>- Но если суд сочтёт ваше участие необходимым (например, для уточнения требований), он может назначить дату заседания с обязательной явкой.
+                           <br>- Всегда есть риск, что без личного участия некоторые моменты будут не учтены или истолкованы не в вашу пользу.
+                           <br>- Вы не сможете возразить или опровергнуть какие-то доводы или представленные ответчиком доказательства и не сможете в следующих инстанциях заявить возражения в отношении установленных судом фактов.
+                       </span>
+                     </span>
+                   </legend>
                  <div class="radio-group">
                    <label><input type="radio" name="withoutPersonalPresence" value="yes"> Да</label>
                    <label><input type="radio" name="withoutPersonalPresence" value="no"> Нет</label>
@@ -672,19 +799,77 @@
                document.addEventListener('DOMContentLoaded', () => {
                  const otherKidsRadios = document.querySelectorAll('input[name="otherKids"]');
                  const otherKidsWrap   = document.getElementById('otherKidsWrap');
+                 const otherKidsAlimonyWrap = document.getElementById('otherKidsAlimonyWrap');
 
                  function toggleOtherKids() {
                    const show = document.querySelector('input[name="otherKids"]:checked').value === 'yes';
-                 
-                    otherKidsWrap.style.display = show ? 'block' : 'none';
+                   otherKidsWrap.style.display = show ? 'block' : 'none';
+                   otherKidsAlimonyWrap.style.display = show ? 'block' : 'none';
                  }
 
                  otherKidsRadios.forEach(r => r.addEventListener('change', toggleOtherKids));
                  toggleOtherKids();                       // первичная инициализация
                });
                
-             </script>
-           </script>
-           </body>
-           </html>
+             
+             /* ---------- 9. алименты за прошлоее время ---------- */
+             document.addEventListener('DOMContentLoaded', () => {
+                 const radios = document.querySelectorAll('input[name="alimonyPastPeriod"]');
+                 const dateWrap = document.getElementById('pastDateWrap');
 
+                 function togglePastDate() {
+                     const isYes = document.querySelector('input[name="alimonyPastPeriod"]:checked')?.value === 'yes';
+                     dateWrap.hidden = !isYes;
+                }
+
+                 radios.forEach(r => r.addEventListener('change', togglePastDate));
+                 togglePastDate(); // инициализация на старте
+             });
+               /* ---------- 10. алименты в твердой форме ---------- */
+
+               document.addEventListener('DOMContentLoaded', () => {
+                 const fixRadios = document.querySelectorAll('input[name="needFixAlimony"]');
+                 const fixWrap   = document.getElementById('fixAmountWrap');
+
+                 function toggleFixAmount() {
+                   const isYes = document.querySelector('input[name="needFixAlimony"]:checked')?.value === 'yes';
+                   fixWrap.hidden = !isYes;
+                 }
+
+                 fixRadios.forEach(r => r.addEventListener('change', toggleFixAmount));
+                 toggleFixAmount(); // начальная инициализация
+               });
+
+           </script>
+         </script>
+         <script>
+         document.getElementById('alimonyForm').addEventListener('submit', function(e) {
+           e.preventDefault(); // отменяем отправку формы по умолчанию
+
+           const form = e.target;
+           const formData = new FormData(form);
+           const data = {};
+
+           // собираем все поля в объект
+           for (const [key, value] of formData.entries()) {
+             if (data[key]) {
+               // если уже есть значение — превращаем в массив
+               if (!Array.isArray(data[key])) data[key] = [data[key]];
+               data[key].push(value);
+             } else {
+               data[key] = value;
+             }
+           }
+
+           console.log('Данные формы:', data);
+
+           // здесь можно сделать отправку, например:
+           // fetch('https://your-backend.com/send', {
+           //   method: 'POST',
+           //   body: JSON.stringify(data),
+           //   headers: { 'Content-Type': 'application/json' }
+           // });
+         });
+         </script>
+         </body>
+         </html>
