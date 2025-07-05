@@ -307,11 +307,6 @@ input[type="date"] {
   box-sizing: border-box;
   width: 100%;
 }
-/* баннер */
-html, body {
-  margin: 0;
-  padding: 0;
-}
 .hero-banner {
   display: block;
   width: 100vw;         /* ширина окна */
