@@ -15,12 +15,14 @@
       background:var(--clr-bg);
       color:var(--clr-text);
       line-height:1.5;
+      overflow-x: hidden
   }
 .container {
-    width: 100%;
-    padding: 2rem 1rem;
-    margin: 0 auto;
-    background: #fff;
+  width: 100%;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  background: #fff;
+  box-sizing: border-box; /* <== добавь обязательно */
 }
 
   /* ---------- заголовки ---------- */
@@ -236,12 +238,12 @@
   z-index: 1000;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
-
 .tooltip-wrap:hover .tooltip-text {
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(-110%); /* сдвигаем чуть выше */
 }
+/* галочки на главной */
 .number.checkmark {
   font-size: 1.5rem;
   color: #0d6efd;
@@ -293,3 +295,28 @@
       stroke-dashoffset: 0;
     }
   }
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: var(--radius);
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+/* баннер */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+.hero-banner {
+  display: block;
+  width: 100vw;         /* ширина окна */
+  height: auto;
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
