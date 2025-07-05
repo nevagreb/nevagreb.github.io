@@ -861,14 +861,20 @@
              }
            }
 
-           console.log('Данные формы:', data);
-
-           // здесь можно сделать отправку, например:
-           // fetch('https://your-backend.com/send', {
-           //   method: 'POST',
-           //   body: JSON.stringify(data),
-           //   headers: { 'Content-Type': 'application/json' }
-           // });
+           fetch('http://localhost:3000/submit-alimony', {
+             method: 'POST',
+             body: JSON.stringify(data),
+             headers: { 'Content-Type': 'application/json' }
+           })
+           .then(response => response.json())
+           .then(result => {
+             console.log('Ответ сервера:', result);
+             alert('Форма успешно отправлена!');
+           })
+           .catch(error => {
+             console.error('Ошибка при отправке:', error);
+             alert('Произошла ошибка при отправке данных.');
+           });
          });
          </script>
          </body>
