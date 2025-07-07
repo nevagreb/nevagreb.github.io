@@ -1,11 +1,12 @@
     /* ---------- переменные ---------- */
     :root{
       --clr-bg:#f8f9fa;
-      --clr-primary:#0d6efd;
+      --clr-primary:#3375e5;
       --clr-text:#212529;
       --clr-muted:#6c757d;
       --radius:.375rem;
     }
+
 
   /* базовая типографика и фон */
   body{
@@ -19,10 +20,11 @@
   }
 .container {
   width: 100%;
+  max-width: 1200px; /* максимальная ширина */
   padding: 2rem 1rem;
   margin: 0 auto;
   background: #fff;
-  box-sizing: border-box; /* <== добавь обязательно */
+  box-sizing: border-box;
 }
 
   /* ---------- заголовки ---------- */
@@ -124,19 +126,20 @@
   margin-top:.25rem;   /* тот же отступ, что и gap у .count-wrap */
 }
 .features {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
   margin-top: 1rem;
 }
 /* элементы на главной странице  */
 .feature-block {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column; /* Важно: вертикальное направление */
+  align-items: flex-start; /* по желанию: выравнивание по левому краю */
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 1rem;
-  background: #f9f9f9;
+  padding: 1.5rem;
+  background: #fff;
 }
 .number {
   font-size: 1.5rem;
@@ -153,8 +156,8 @@
   margin-top: 2rem; /* или 48px / 60px по желанию */
 }
 .services-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* два равных столбца */
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -243,44 +246,6 @@
   opacity: 1;
   transform: translateX(-50%) translateY(-110%); /* сдвигаем чуть выше */
 }
-/* галочки на главной */
-.number.checkmark, .checkmark {
-  font-size: 1.5rem;
-  color: #0d6efd;
-  margin-right: 1rem;
-  width: 3rem;
-  height: 3rem;
-  background-color: #e6f0ff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  cursor: default;
- }
-  .checkmark-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    stroke: #0d6efd;
-    stroke-width: 3;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-.feature-block:hover .checkmark-icon path {
-    stroke-dasharray: 20;
-    stroke-dashoffset: 20;
-    animation: draw-check 0.5s ease forwards;
-  }
-  @keyframes draw-check {
-    from {
-      stroke-dashoffset: 20;
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
 input[type="date"] {
   appearance: none;
   -webkit-appearance: none;
@@ -300,4 +265,16 @@ input[type="date"] {
   margin: 0;
   padding: 0;
   max-width: none;
+}
+/* картинки на главной  */
+.feature-image {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.feature-image img {
+  width: 50%;           /* уменьшает примерно на 30% */
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
