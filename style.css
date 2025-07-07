@@ -125,11 +125,18 @@
   display:block;       /* перенос под input */
   margin-top:.25rem;   /* тот же отступ, что и gap у .count-wrap */
 }
-.features {
+.features,
+.services-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr; /* максимум 2 колонки */
   gap: 1.5rem;
   margin-top: 1rem;
+}
+@media (max-width: 640px) {
+  .features,
+  .services-list {
+    grid-template-columns: 1fr; /* одна колонка на телефонах */
+  }
 }
 /* элементы на главной странице  */
 .feature-block {
@@ -154,12 +161,6 @@
 }
 .section-spacing {
   margin-top: 2rem; /* или 48px / 60px по желанию */
-}
-.services-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* два равных столбца */
-  gap: 2rem;
-  margin-top: 2rem;
 }
 .service-item {
   padding: 1.5rem;
