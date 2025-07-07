@@ -180,7 +180,7 @@
 .service-item button {
   padding: 0.6rem 1.2rem;
   font-size: 1rem;
-  background-color: #4664ff;
+  background-color: #3375e5;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -188,7 +188,7 @@
   transition: background-color 0.2s ease;
 }
 .service-item button:hover {
-  background-color: #314bd1;
+  background-color: #1f5fc7;
 }
 /* подсказки для полей  */
 .tooltip-wrap {
