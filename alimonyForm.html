@@ -74,7 +74,7 @@
 
         <div id="snilsFields" class="id-fields">
           <label for="snils" class="required">Ваш СНИЛС</label>
-          <input type="text" id="snils" name="snils" placeholder="000-000-000 00" pattern="\d{3}-\d{3}-\d{3} \d{2}">
+          <input type="text" id="snils" name="snils" placeholder="000-000-000 00" maxlength="14">
         </div>
 
         <div id="innFields" class="id-fields" hidden>
@@ -368,7 +368,6 @@
                            <br>- сведения о наличии дополнительных доходов (например, от сдачи имущества в аренду, фриланса, подработок);
                            <br>- дивиденды от акций, долей в бизнесе или иных инвестициях;
                            <br>- премии, бонусы, компенсации и иные нерегулярные выплаты;
-                           <br>- сведения о материальных благах (например, служебный транспорт, жилье);
                            <br>- любые другие источники средств, которые могут рассматриваться как доход.
                        </span>
                      </span>
@@ -378,7 +377,7 @@
                  <textarea id="addInfo"
                            name="addInfo"
                            rows="8"
-                           placeholder="Второй родитель дополнительно получает доход от сдачи квартиры в аренду (20 000 руб. в месяц), а также ежегодные дивиденды от владения акциями ПАО «Газпром» (примерно 45 000 руб. в год). Кроме того, получает ежеквартальные бонусы на основной работе, размер которых варьируется (в среднем 30 000 руб. в квартал). Известно также о наличии доли в ООО, сведения о доходах по которой отсутствуют, но есть основания полагать, что доход имеется."
+                           placeholder="Второй родитель дополнительно получает доход от сдачи квартиры в аренду (20 000 руб. в месяц), а также дивиденды от владения акциями ПАО «Газпром» (примерно 45 000 руб. в год). Кроме того, получает ежеквартальные бонусы на основной работе, размер которых варьируется (в среднем 30 000 руб. в квартал). Известно также о наличии доли в ООО, сведения о доходах по которой отсутствуют, но есть основания полагать, что доход имеется."
                            style="width:100%; resize:vertical;"></textarea>
 
                  <small>Дополнительные доходы второго родителя. Если нет информации, поле можно оставить пустым.</small>
@@ -639,7 +638,110 @@
              }
              p2Radios.forEach(r=>r.addEventListener('change',toggleP2IdFields));
              toggleP2IdFields();
+             
+             // 2-а. Форматирование: СНИЛС
+               function formatSnils(value) {
+                 const digits = value.replace(/\D/g, '').slice(0, 11);
+                 let result = '';
+                 if (digits.length > 0) result += digits.slice(0, 3);
+                 if (digits.length > 3) result += '-' + digits.slice(3, 6);
+                 if (digits.length > 6) result += '-' + digits.slice(6, 9);
+                 if (digits.length > 9) result += ' ' + digits.slice(9, 11);
+                 return result;
+               }
 
+               // Форматирование: ИНН
+               function formatInn(value) {
+                 return value.replace(/\D/g, '').slice(0, 12);
+               }
+
+               // Форматирование: Паспорт
+               function formatPassport(value) {
+                 const digits = value.replace(/\D/g, '').slice(0, 10);
+                 let result = '';
+                 if (digits.length > 0) result += digits.slice(0, 4);
+                 if (digits.length > 4) result += ' ' + digits.slice(4, 10);
+                 return result;
+               }
+
+               // Форматирование: ВУ
+               function formatDriver(value) {
+                 const digits = value.replace(/\D/g, '').slice(0, 10);
+                 let result = '';
+                 if (digits.length > 0) result += digits.slice(0, 2);
+                 if (digits.length > 2) result += ' ' + digits.slice(2, 4);
+                 if (digits.length > 4) result += ' ' + digits.slice(4, 10);
+                 return result;
+               }
+
+               // Привязка поля к формату
+               function attachFormatter(inputId, formatter) {
+                 const el = document.getElementById(inputId);
+                 if (el) {
+                   el.addEventListener('input', (e) => {
+                     e.target.value = formatter(e.target.value);
+                   });
+                 }
+               }
+
+               // Заявитель
+               attachFormatter('snils', formatSnils);
+               attachFormatter('inn', formatInn);
+               attachFormatter('passport', formatPassport);
+               attachFormatter('driver', formatDriver);
+
+               // Второй родитель
+               attachFormatter('p2Snils', formatSnils);
+               attachFormatter('p2Inn', formatInn);
+               attachFormatter('p2Passport', formatPassport);
+               attachFormatter('p2Driver', formatDriver);
+
+               /* 2-б. формат телефона  */
+
+               function formatPhone(value) {
+                   const digits = value.replace(/\D/g, '').replace(/^8/, '7').slice(0, 11);
+                   let result = '+7';
+                   if (digits.length > 1) result += '(' + digits.slice(1, 4);
+                   if (digits.length >= 4) result += ') ' + digits.slice(4, 7);
+                   if (digits.length >= 7) result += '-' + digits.slice(7, 9);
+                   if (digits.length >= 9) result += '-' + digits.slice(9, 11);
+                   return result;
+                 }
+
+                 // Заявитель
+                 const phoneInput = document.getElementById('phone');
+                 phoneInput?.addEventListener('input', (e) => {
+                   e.target.value = formatPhone(e.target.value);
+                 });
+
+                 // Второй родитель
+                 const p2PhoneInput = document.getElementById('p2phone');
+                 p2PhoneInput?.addEventListener('input', (e) => {
+                   e.target.value = formatPhone(e.target.value);
+                 });
+               
+               /* 2-в. формат индекса  */
+
+               function formatPostal(value) {
+                   return value.replace(/\D/g, '').slice(0, 6); // только цифры, не больше 6
+                 }
+
+                 const postalInputs = [
+                   'regPostal',
+                   'factPostal',
+                   'p2RegPostal',
+                   'p2FactPostal'
+                 ];
+
+                 postalInputs.forEach(id => {
+                   const input = document.getElementById(id);
+                   if (input) {
+                     input.addEventListener('input', (e) => {
+                       e.target.value = formatPostal(e.target.value);
+                     });
+                   }
+                 });
+               
              /* ---------- 3. адрес заявителя (у вас уже был) ---------- */
              const addrRadios=document.querySelectorAll('input[name="sameAddress"]');
              const factBlock=document.getElementById('factAddress');
@@ -762,7 +864,7 @@
                  line2.className = 'grid-2';
                  line2.append(
                    Object.assign(document.createElement('input'), {type:'date', name:'kidBirthDate[]', placeholder:'ДД-ММ-ГГГГ'}),
-                   Object.assign(document.createElement('input'), {type:'text', name:'kidCert[]',      placeholder:'I-ГЮ № …'})
+                   Object.assign(document.createElement('input'), {type:'text', name:'kidCert[]',      placeholder:'Введите номер свидетельства'})
                  );
 
                  row.append(line1, line2);
