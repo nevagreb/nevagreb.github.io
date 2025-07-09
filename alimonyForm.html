@@ -807,7 +807,7 @@
                const name = document.createElement('input');
                name.type        = 'text';
                name.name        = 'p2WorkName[]';
-               name.placeholder = 'Место работы';
+               name.placeholder = 'ООО "Ромашка"';
 
                const inn  = document.createElement('input');
                inn.type        = 'text';
@@ -830,7 +830,14 @@
 
              updateRemoveVisibility();  // первичная инициализация
              
-             
+             // Ограничение ввода: только цифры, максимум 10 символов
+             workRows.addEventListener('input', function(event) {
+               const input = event.target;
+               if (input.name === 'p2WorkInn[]') {
+                 input.value = input.value.replace(/\D/g, '').slice(0, 10);
+               }
+             });
+               
              /* ---------- 6. авто-подгон высоты textarea ---------- */
              (function(){
                const ta = document.getElementById('addInfo');
