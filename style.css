@@ -296,3 +296,16 @@ input[type="date"] {
     opacity: 0 !important;
   }
 }
+/* Показывать подпись под датой только на мобильных */
+.mobile-date-note {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--clr-muted);
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .mobile-date-note {
+    display: block;
+  }
+}

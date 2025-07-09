@@ -872,39 +872,42 @@
                  row.className = 'kid-row';
 
                  // первая строка: Имя / Отчество / Фамилия
-                   const line1 = document.createElement('div');
-                   line1.className = 'grid-3';
-                   line1.append(
-                     Object.assign(document.createElement('input'), {
-                       type: 'text',
-                       name: 'kidFirstName[]',
-                       placeholder: 'Имя',
-                       required: true
-                     }),
-                     Object.assign(document.createElement('input'), {
-                       type: 'text',
-                       name: 'kidMiddleName[]',
-                       placeholder: 'Отчество',
-                       required: true
-                     }),
-                     Object.assign(document.createElement('input'), {
-                       type: 'text',
-                       name: 'kidLastName[]',
-                       placeholder: 'Фамилия',
-                       required: true
-                     })
-                   );
+                 const line1 = document.createElement('div');
+                 line1.className = 'grid-3';
+                 line1.append(
+                   Object.assign(document.createElement('input'), {
+                     type: 'text',
+                     name: 'kidFirstName[]',
+                     placeholder: 'Имя',
+                     required: true
+                   }),
+                   Object.assign(document.createElement('input'), {
+                     type: 'text',
+                     name: 'kidMiddleName[]',
+                     placeholder: 'Отчество',
+                     required: true
+                   }),
+                   Object.assign(document.createElement('input'), {
+                     type: 'text',
+                     name: 'kidLastName[]',
+                     placeholder: 'Фамилия',
+                     required: true
+                   })
+                 );
 
-                 /* вторая строка: Дата рождения / Свидетельство */
+                 // вторая строка: Дата рождения / Свидетельство
                  const line2 = document.createElement('div');
                  line2.className = 'grid-2';
 
-                 // Создание input-даты с условной установкой сегодняшней даты
                  const birthDateInput = document.createElement('input');
                  birthDateInput.type = 'date';
                  birthDateInput.name = 'kidBirthDate[]';
                  birthDateInput.placeholder = 'ДД-ММ-ГГГГ';
                  birthDateInput.required = true;
+
+                 const mobileNote = document.createElement('small');
+                 mobileNote.className = 'mobile-date-note';
+                 mobileNote.textContent = 'Введите дату рождения ребёнка';
 
                  if (isMobileDevice()) {
                    const today = new Date();
@@ -914,9 +917,15 @@
                    birthDateInput.value = `${yyyy}-${mm}-${dd}`;
                  }
 
+                 // добавляем дату, подпись (только на моб.), затем свидетельство
                  line2.append(
                    birthDateInput,
-                   Object.assign(document.createElement('input'), {type:'text', name:'kidCert[]', placeholder:'Введите номер свидетельства'})
+                   mobileNote,
+                   Object.assign(document.createElement('input'), {
+                     type: 'text',
+                     name: 'kidCert[]',
+                     placeholder: 'Введите номер свидетельства'
+                   })
                  );
 
                  row.append(line1, line2);
@@ -1002,38 +1011,8 @@
                  fixRadios.forEach(r => r.addEventListener('change', toggleFixAmount));
                  toggleFixAmount(); // начальная инициализация
                });
-               /* ---------- 11. Устанавливаем сегодняшнюю дату в формате YYYY-MM-DD---------- */
-
-               function isMobileDevice() {
-                   return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-                 }
-
-                 // Установить сегодняшнюю дату в поле по ID
-                 function setToday(id) {
-                   const input = document.getElementById(id);
-                   if (!input) return;
-
-                   const today = new Date();
-                   const yyyy = today.getFullYear();
-                   const mm = String(today.getMonth() + 1).padStart(2, '0');
-                   const dd = String(today.getDate()).padStart(2, '0');
-
-                   input.value = `${yyyy}-${mm}-${dd}`;
-                 }
-
-                 // Вызов при загрузке
-                 document.addEventListener('DOMContentLoaded', () => {
-                   if (isMobileDevice()) {
-                     // Укажи только те поля, где это уместно:
-                     setToday('alimonyFromDate');
-                     setToday('marriageDate');
-                     setToday('divorseDate');
-                    setToday('birthDate');
-                    setToday('p2BirthDate');
-                   }
-                 });
                
-               /* ---------- 12. Алерты в подсказках ---------- */
+               /* ---------- 11. Алерты в подсказках ---------- */
                function isMobileDevice() {
                  return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
                }
