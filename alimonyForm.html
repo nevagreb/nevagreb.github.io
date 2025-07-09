@@ -339,7 +339,7 @@
 
                    <!-- ①  Сетка – тут ТОЛЬКО input-поля -->
                    <div id="workRows">
-                     <input type="text" name="p2WorkName[]" placeholder="Место работы">
+                     <input type="text" name="p2WorkName[]" placeholder="ООО &quot;Ромашка&quot;">
                      <input type="text" name="p2WorkInn[]"  placeholder="ИНН">
                    </div>             <!--  ← закрыли #workRows -->
 
@@ -497,13 +497,13 @@
                </fieldset>
                
                <!-- счётчик -->
-               <div id="otherKidsWrap" class="count-wrap">
+               <div id="otherKidsWrap" class="count-wrap" style="display: none;">
                  <label for="otherKidsCount">Укажите количество других детей</label>
                  <input  type="number" id="otherKidsCount" name="otherKidsCount" value="0" min="0">
                  <small>Укажите других несовершеннолетних детей</small>
                </div>
                
-               <div id="otherKidsAlimonyWrap">
+               <div id="otherKidsAlimonyWrap" style="display: none;">
                  <fieldset>
                    <legend>Есть ли судебный акт или нотариальное соглашение об оплате алиментов в пользу иных детей?</legend>
                    <div class="radio-group">
@@ -916,13 +916,22 @@
                  const otherKidsAlimonyWrap = document.getElementById('otherKidsAlimonyWrap');
 
                  function toggleOtherKids() {
-                   const show = document.querySelector('input[name="otherKids"]:checked').value === 'yes';
+                   const checked = document.querySelector('input[name="otherKids"]:checked');
+
+                   // Если не выбрано — обязательно скрыть
+                   if (!checked) {
+                     otherKidsWrap.style.display = 'none';
+                     otherKidsAlimonyWrap.style.display = 'none';
+                     return;
+                   }
+
+                   const show = checked.value === 'yes';
                    otherKidsWrap.style.display = show ? 'block' : 'none';
                    otherKidsAlimonyWrap.style.display = show ? 'block' : 'none';
                  }
 
                  otherKidsRadios.forEach(r => r.addEventListener('change', toggleOtherKids));
-                 toggleOtherKids();                       // первичная инициализация
+                 toggleOtherKids(); // инициализация после DOM готов
                });
                
              
@@ -953,6 +962,35 @@
                  fixRadios.forEach(r => r.addEventListener('change', toggleFixAmount));
                  toggleFixAmount(); // начальная инициализация
                });
+               /* ---------- 11. Устанавливаем сегодняшнюю дату в формате YYYY-MM-DD---------- */
+
+               function isMobileDevice() {
+                   return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                 }
+
+                 // Установить сегодняшнюю дату в поле по ID
+                 function setToday(id) {
+                   const input = document.getElementById(id);
+                   if (!input) return;
+
+                   const today = new Date();
+                   const yyyy = today.getFullYear();
+                   const mm = String(today.getMonth() + 1).padStart(2, '0');
+                   const dd = String(today.getDate()).padStart(2, '0');
+
+                   input.value = `${yyyy}-${mm}-${dd}`;
+                 }
+
+                 // Вызов при загрузке
+                 document.addEventListener('DOMContentLoaded', () => {
+                   if (isMobileDevice()) {
+                     // Укажи только те поля, где это уместно:
+                     setToday('alimonyFromDate');
+                     setToday('marriageDate');
+                     // setToday('birthDate');       ← осторожно, дата рождения не должна быть сегодняшней!
+                     // setToday('p2BirthDate');
+                   }
+                 });
 
            </script>
          </script>
