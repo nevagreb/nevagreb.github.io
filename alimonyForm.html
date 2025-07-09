@@ -361,7 +361,11 @@
                <div>
                    <label for="addInfo">
                      Дополнительные сведения о доходах
-                     <span class="tooltip-wrap">
+                     <span class="tooltip-wrap" data-tooltip="Укажите любую дополнительную информацию, которая может иметь значение для расчета размера алиментов. Это могут быть:
+                           <br>- сведения о наличии дополнительных доходов (например, от сдачи имущества в аренду, фриланса, подработок);
+                           <br>- дивиденды от акций, долей в бизнесе или иных инвестициях;
+                           <br>- премии, бонусы, компенсации и иные нерегулярные выплаты;
+                           <br>- любые другие источники средств, которые могут рассматриваться как доход.">
                        <span class="tooltip-icon">?</span>
                        <span class="tooltip-text">
                            Укажите любую дополнительную информацию, которая может иметь значение для расчета размера алиментов. Это могут быть:
@@ -1012,6 +1016,24 @@
                     setToday('p2BirthDate');
                    }
                  });
+               
+               /* ---------- 12. Алерты в подсказках ---------- */
+               function isMobileDevice() {
+                 return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+               }
+
+               if (isMobileDevice()) {
+                 document.querySelectorAll('.tooltip-wrap').forEach(el => {
+                   el.addEventListener('click', function (e) {
+                     const text = el.dataset.tooltip;
+                     if (text) {
+                       alert(text);
+                       e.preventDefault();
+                       e.stopPropagation();
+                     }
+                   });
+                 });
+               }
 
            </script>
          </script>
@@ -1035,7 +1057,7 @@
              for (const [key, value] of formData.entries()) {
                if (data[key]) {
                  if (!Array.isArray(data[key])) data[key] = [data[key]];
-                 data[key].push(value);
+                 dчata[key].push(value);
                } else {
                  data[key] = value;
                }
