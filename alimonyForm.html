@@ -904,18 +904,11 @@
                  birthDateInput.name = 'kidBirthDate[]';
                  birthDateInput.placeholder = 'ДД-ММ-ГГГГ';
                  birthDateInput.required = true;
+                 birthDateInput.autocomplete = 'off';
 
                  const mobileNote = document.createElement('small');
                  mobileNote.className = 'mobile-date-note';
                  mobileNote.textContent = 'Введите дату рождения ребёнка';
-
-                 if (isMobileDevice()) {
-                   const today = new Date();
-                   const yyyy = today.getFullYear();
-                   const mm = String(today.getMonth() + 1).padStart(2, '0');
-                   const dd = String(today.getDate()).padStart(2, '0');
-                   birthDateInput.value = `${yyyy}-${mm}-${dd}`;
-                 }
 
                  // добавляем дату, подпись (только на моб.), затем свидетельство
                  line2.append(
