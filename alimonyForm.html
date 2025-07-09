@@ -362,10 +362,10 @@
                    <label for="addInfo">
                      Дополнительные сведения о доходах
                      <span class="tooltip-wrap" data-tooltip="Укажите любую дополнительную информацию, которая может иметь значение для расчета размера алиментов. Это могут быть:
-                           <br>- сведения о наличии дополнительных доходов (например, от сдачи имущества в аренду, фриланса, подработок);
-                           <br>- дивиденды от акций, долей в бизнесе или иных инвестициях;
-                           <br>- премии, бонусы, компенсации и иные нерегулярные выплаты;
-                           <br>- любые другие источники средств, которые могут рассматриваться как доход.">
+                           - сведения о наличии дополнительных доходов (например, от сдачи имущества в аренду, фриланса, подработок);
+                           - дивиденды от акций, долей в бизнесе или иных инвестициях;
+                           - премии, бонусы, компенсации и иные нерегулярные выплаты;
+                           - любые другие источники средств, которые могут рассматриваться как доход.">
                        <span class="tooltip-icon">?</span>
                        <span class="tooltip-text">
                            Укажите любую дополнительную информацию, которая может иметь значение для расчета размера алиментов. Это могут быть:
@@ -1019,21 +1019,31 @@
                
                /* ---------- 12. Алерты в подсказках ---------- */
                function isMobileDevice() {
-                 return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-               }
+                   return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+                 }
 
-               if (isMobileDevice()) {
-                 document.querySelectorAll('.tooltip-wrap').forEach(el => {
-                   el.addEventListener('click', function (e) {
-                     const text = el.dataset.tooltip;
-                     if (text) {
-                       alert(text);
+                 document.addEventListener('DOMContentLoaded', () => {
+                   if (!isMobileDevice()) return;
+
+                   document.querySelectorAll('.tooltip-wrap').forEach(wrap => {
+                     const icon = wrap.querySelector('.tooltip-icon');
+                     const text = wrap.querySelector('.tooltip-text');
+
+                     if (!icon || !text) return;
+
+                     // Берём текст подсказки
+                     const tooltipText = text.textContent.trim();
+
+                     // При нажатии — показываем alert
+                     icon.addEventListener('click', (e) => {
                        e.preventDefault();
                        e.stopPropagation();
-                     }
+                       if (tooltipText) {
+                         alert(tooltipText);
+                       }
+                     });
                    });
                  });
-               }
 
            </script>
          </script>
