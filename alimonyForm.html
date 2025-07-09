@@ -871,14 +871,29 @@
                  const row = document.createElement('div');
                  row.className = 'kid-row';
 
-                 /* первая строка: Имя / Отчество / Фамилия */
-                 const line1 = document.createElement('div');
-                 line1.className = 'grid-3';
-                 line1.append(
-                   Object.assign(document.createElement('input'), {type:'text', name:'kidFirstName[]',  placeholder:'Имя'}),
-                   Object.assign(document.createElement('input'), {type:'text', name:'kidMiddleName[]', placeholder:'Отчество'}),
-                   Object.assign(document.createElement('input'), {type:'text', name:'kidLastName[]',   placeholder:'Фамилия'})
-                 );
+                 // первая строка: Имя / Отчество / Фамилия
+                   const line1 = document.createElement('div');
+                   line1.className = 'grid-3';
+                   line1.append(
+                     Object.assign(document.createElement('input'), {
+                       type: 'text',
+                       name: 'kidFirstName[]',
+                       placeholder: 'Имя',
+                       required: true
+                     }),
+                     Object.assign(document.createElement('input'), {
+                       type: 'text',
+                       name: 'kidMiddleName[]',
+                       placeholder: 'Отчество',
+                       required: true
+                     }),
+                     Object.assign(document.createElement('input'), {
+                       type: 'text',
+                       name: 'kidLastName[]',
+                       placeholder: 'Фамилия',
+                       required: true
+                     })
+                   );
 
                  /* вторая строка: Дата рождения / Свидетельство */
                  const line2 = document.createElement('div');
@@ -889,6 +904,7 @@
                  birthDateInput.type = 'date';
                  birthDateInput.name = 'kidBirthDate[]';
                  birthDateInput.placeholder = 'ДД-ММ-ГГГГ';
+                 birthDateInput.required = true;
 
                  if (isMobileDevice()) {
                    const today = new Date();
