@@ -1019,31 +1019,33 @@
                
                /* ---------- 12. Алерты в подсказках ---------- */
                function isMobileDevice() {
-                   return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-                 }
+                 return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+               }
 
-                 document.addEventListener('DOMContentLoaded', () => {
-                   if (!isMobileDevice()) return;
+               document.addEventListener('DOMContentLoaded', () => {
+                 if (!isMobileDevice()) return;
 
-                   document.querySelectorAll('.tooltip-wrap').forEach(wrap => {
-                     const icon = wrap.querySelector('.tooltip-icon');
-                     const text = wrap.querySelector('.tooltip-text');
+                 document.querySelectorAll('.tooltip-wrap').forEach(wrap => {
+                   const icon = wrap.querySelector('.tooltip-icon');
+                   const text = wrap.querySelector('.tooltip-text');
 
-                     if (!icon || !text) return;
+                   if (!icon || !text) return;
 
-                     // Берём текст подсказки
-                     const tooltipText = text.textContent.trim();
+                   icon.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     e.stopPropagation();
 
-                     // При нажатии — показываем alert
-                     icon.addEventListener('click', (e) => {
-                       e.preventDefault();
-                       e.stopPropagation();
-                       if (tooltipText) {
-                         alert(tooltipText);
-                       }
-                     });
+                     let tooltipText = text.innerHTML
+                       .replace(/<br\s*\/?>/gi, '\n')      // заменяем <br> на перенос строки
+                       .replace(/^\s+/gm, '')              // убираем пробелы в начале строк
+                       .replace(/&nbsp;/gi, ' ')           // заменяем неразрывные пробелы
+                       .replace(/&quot;/gi, '"')           // кавычки
+                       .replace(/&laquo;|&raquo;/gi, '"'); // ёлочки
+
+                     alert(tooltipText);
                    });
                  });
+               });
 
            </script>
          </script>
