@@ -283,3 +283,8 @@ input[type="date"] {
 button .loader {
   margin-left: 8px;
 }
+/* минимальная высота лейбла даты для айфона */
+input[type="date"] {
+  min-height: 2.5em;  /* или padding */
+  padding: 0.5em;
+}
