@@ -610,8 +610,13 @@
                  </div>
                </fieldset>
                
-               <!-- ======================  К Н О П К А  ====================== -->
-               <button type="submit">Отправить заявление</button>
+               <!-- ======================  К Н О П К А  ====================== -->               
+               <button id="submitButton" type="submit">
+                 <span class="button-text">Отправить</span>
+                 <span class="loader" style="display: none;">Загрузка...</span>
+               </button>
+               
+               
              </form>
            </main>
 
@@ -945,39 +950,52 @@
            </script>
          </script>
          <script>
-         document.getElementById('alimonyForm').addEventListener('submit', function(e) {
-           e.preventDefault(); // отменяем отправку формы по умолчанию
+           document.getElementById('alimonyForm').addEventListener('submit', function(e) {
+             e.preventDefault();
 
-           const form = e.target;
-           const formData = new FormData(form);
-           const data = {};
+             const form = e.target;
+             const submitButton = document.getElementById('submitButton');
+             const buttonText = submitButton.querySelector('.button-text');
+             const loader = submitButton.querySelector('.loader');
 
-           // собираем все поля в объект
-           for (const [key, value] of formData.entries()) {
-             if (data[key]) {
-               // если уже есть значение — превращаем в массив
-               if (!Array.isArray(data[key])) data[key] = [data[key]];
-               data[key].push(value);
-             } else {
-               data[key] = value;
+             // Блокировка кнопки и отображение загрузки
+             submitButton.disabled = true;
+             buttonText.style.display = 'none';
+             loader.style.display = 'inline';
+
+             const formData = new FormData(form);
+             const data = {};
+
+             for (const [key, value] of formData.entries()) {
+               if (data[key]) {
+                 if (!Array.isArray(data[key])) data[key] = [data[key]];
+                 data[key].push(value);
+               } else {
+                 data[key] = value;
+               }
              }
-           }
 
-           fetch('https://alimonyserver.onrender.com/submit-alimony', {
-             method: 'POST',
-             body: JSON.stringify(data),
-             headers: { 'Content-Type': 'application/json' }
-           })
-           .then(response => response.json())
-           .then(result => {
-             console.log('Ответ сервера:', result);
-             alert('Форма успешно отправлена!');
-           })
-           .catch(error => {
-             console.error('Ошибка при отправке:', error);
-             alert('Произошла ошибка при отправке данных.');
+             fetch('https://alimonyserver.onrender.com/submit-alimony', {
+               method: 'POST',
+               body: JSON.stringify(data),
+               headers: { 'Content-Type': 'application/json' }
+             })
+             .then(response => response.json())
+             .then(result => {
+               console.log('Ответ сервера:', result);
+               alert('Форма успешно отправлена!');
+             })
+             .catch(error => {
+               console.error('Ошибка при отправке:', error);
+               alert('Произошла ошибка при отправке данных.');
+             })
+             .finally(() => {
+               // Возвращаем кнопку в исходное состояние
+               submitButton.disabled = false;
+               buttonText.style.display = 'inline';
+               loader.style.display = 'none';
+             });
            });
-         });
          </script>
          </body>
          </html>
